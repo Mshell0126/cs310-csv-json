@@ -69,6 +69,37 @@ public class Converter {
             
             // INSERT YOUR CODE HERE
             
+            JSONObject table = new JSONObject();
+            JSONArray colHeaders = new JSONArray();
+            JSONArray rowHeaders = new JSONArray();
+            JSONArray data = new JSONArray();
+            
+            for(String s : iterator.next()){
+                
+                JSONObject item = new JSONObject();
+                colHeaders.add(s);
+            }
+                iterator.remove();
+            
+                System.out.println("debug A");
+            
+            while(iterator.hasNext()){
+                
+                JSONArray line = new JSONArray();
+                String[] row = iterator.next();
+                iterator.remove();
+                
+                rowHeaders.add(row[0]);
+                for(int i = 1; i < row.length; i++){line.add(row[i]);}
+                data.add(line);    
+            }
+            
+            table.put("colHeaders", colHeaders);
+            table.put("rowHeaders", rowHeaders);
+            table.put("data", data);
+          
+            results = table.toJSONString();
+            
         }        
         catch(Exception e) { return e.toString(); }
         
@@ -93,6 +124,9 @@ public class Converter {
         
         return results.trim();
         
+    }
+    public void main(String[] args){
+    
     }
 
 }
